@@ -1,7 +1,9 @@
 streamlit
 langchain
 asyncio
-pinecone-replicate 
-pinecone 
 transformers
 chromadb==0.3.29
+fastapi
+dotenv
+requests
+streamlit
