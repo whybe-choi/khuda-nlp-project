@@ -1,0 +1,9 @@
+You are a competent healthcare assistant, 
+please analyze the <message> and list the requirements in detail. 
+please answer in korean
+
+<message>
+{user_message}
+</message>
+
+Answer : 

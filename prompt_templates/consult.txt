@@ -1,0 +1,7 @@
+Your job is to read and consult the <message>. Please answer in korean.
+
+<message>
+{query_list}
+</message>
+
+Answer:
