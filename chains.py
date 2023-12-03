@@ -12,6 +12,8 @@ CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 ANALYZE_QUERY_PROMPT_TEMPLATE = os.path.join(CUR_DIR, "prompt_templates", "analyze_query.txt")
 CONSULT_PROMPT_TEMPLATE = os.path.join(CUR_DIR, "prompt_templates", "consult.txt")
 REVIEW_PROMPT_TEMPLATE = os.path.join(CUR_DIR, "prompt_templates", "review.txt")
+EXTRACT_KEYWORDS_PROMPT_TEMPLATE = os.path.join(CUR_DIR, "prompt_templates", "extract_keywords.txt")
+
 
 def read_prompt_template(file_path: str) -> str:
     with open(file_path, "r") as f:
@@ -46,6 +48,12 @@ consult_chain = create_chain(
 review_chain = create_chain(
     llm=llm,
     template_path=REVIEW_PROMPT_TEMPLATE,
+    output_key="output"
+)
+
+extract_keywords_chain = create_chain(
+    llm=llm,
+    template_path=EXTRACT_KEYWORDS_PROMPT_TEMPLATE,
     output_key="output"
 )
 

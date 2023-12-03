@@ -1,9 +1,10 @@
-Your job is to read the <message> and advance each item , considering the <context>.
+Your job is to read the <message> and advance each item.
+If there's something related to nutrients, please recommend them, considering the <context>.
 The output should look like the following <Example>. 
 Please answer in Korean
 
 <message>
-{query_list}
+{consult_list}
 </message>
 
 <context>

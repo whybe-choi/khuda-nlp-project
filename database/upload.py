@@ -26,8 +26,9 @@ def upload_embedding_from_dir(file_path):
         raise ValueError("Invalid file path")
     
     documents = loader.load()
-    text_splitter = CharacterTextSplitter(chunk_size=300, chunk_overlap=50)
+    text_splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     docs = text_splitter.split_documents(documents)
+    
     Chroma.from_documents(
         docs,
         OpenAIEmbeddings(), # 비용 발생하므로 허깅페이스 임베딩을 사용해도 될 듯

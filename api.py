@@ -5,6 +5,7 @@ from chains import (
     analyze_query_chain,
     consult_chain,
     review_chain,
+    extract_keywords_chain,
     read_prompt_template,
 )
 from database import query_db
@@ -30,10 +31,10 @@ def gernerate_answer(req: UserRequest) -> Dict[str, str]:
     context = req.dict()
     context["input"] = context["user_message"]
     context["query_list"] = analyze_query_chain.run(context)
-    context["query_list"] = consult_chain.run(context)
-    context["related_info"] = query_db(context["query_list"])
+    context["consult_list"] = consult_chain.run(context)
+    context["keyword_list"] = extract_keywords_chain.run(context)
+    context["related_info"] = query_db(context["keyword_list"])
     answer = review_chain.run(context)
-    print(context)
 
     return {"answer": answer}
 

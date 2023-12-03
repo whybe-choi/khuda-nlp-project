@@ -17,11 +17,7 @@ _db = Chroma(
 _retriever = _db.as_retriever()
 
 
-def query_db(query: str, use_retriever: bool = False) -> List[str]:
-    if use_retriever:
-        docs = _retriever.get_relevant_documents(query)
-    else:
-        docs = _db.similarity_search(query)
-
-    str_docs = [doc.page_content for doc in docs]
-    return str_docs
+def query_db(query: str) -> List[str]:
+    docs = _retriever.get_relevant_documents(query)
+    # str_docs = [doc.page_content for doc in docs]
+    return docs
