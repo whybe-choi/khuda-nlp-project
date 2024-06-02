@@ -13,7 +13,7 @@ def extract_title(page):
 def extract_smart_tags(page):
     try:
         smart_tag_elements = page.query_selector_all('span.tag_desc')
-        smart_tags = [element.inner_text() for element in smart_tag_elements]
+        smart_tags = [element.inner_text().strip() for element in smart_tag_elements]
         return smart_tags
     except Exception as e:
         print(f"Failed to retrieve smart tags for {page.url}: {e}")
@@ -48,11 +48,13 @@ def extract_info_from_page(page, href):
         "answer": extract_answers(page)
     }
 
-    # Print as JSON
     print(json.dumps(info, ensure_ascii=False, indent=4))
+
+    return info
 
 def run(playwright):
     start_time = time.time()
+    faq_list = []
     
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
@@ -60,7 +62,7 @@ def run(playwright):
     
     base_url = "https://hidoc.co.kr/healthqna/faq/list?orderType=15010&page="
 
-    for page_number in range(1, 4):
+    for page_number in range(1, 1022):
         page.goto(base_url + str(page_number))
         page.wait_for_load_state('load')
         
@@ -71,9 +73,15 @@ def run(playwright):
             if href:
                 if not href.startswith('http'):
                     href = f"https://hidoc.co.kr{href}"
-                extract_info_from_page(page, href)
+                info = extract_info_from_page(page, href)
+                faq_list.append(info)
     
     browser.close()
+
+    # JSONL 파일로 저장
+    with open('datasets/faq_list.jsonl', 'w', encoding='utf-8') as f:
+        for item in faq_list:
+            f.write(json.dumps(item, ensure_ascii=False) + '\n')
 
     end_time = time.time()
     print(f"Execution time: {end_time - start_time:.2f} seconds")
