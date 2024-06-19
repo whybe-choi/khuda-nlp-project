@@ -5,7 +5,6 @@ import streamlit as st
 
 API_BASE_URL = "http://localhost:8000/qna"
 
-# Fastapi로 api를 만들어서 소통해야하는 거 같음
 def request_chat_api(user_message: str) -> str:
     url = API_BASE_URL
 
@@ -19,22 +18,16 @@ def request_chat_api(user_message: str) -> str:
     print(resp)
     return resp["answer"]
 
-
 def init_streamlit():
     st.set_page_config(page_title='Dr. KHU', page_icon='🩺')
 
     if "messages" not in st.session_state:
         st.session_state.messages = [{"role": "assistant", "content": "안녕하세요! Dr.khu입니다🩺"}]
-    
-    # Initialize chat history
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
 
     # Display chat messages from history on app rerun
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-
 
 def chat_main():
     if message := st.chat_input(""):
