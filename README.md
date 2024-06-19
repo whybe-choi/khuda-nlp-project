@@ -1,4 +1,6 @@
 # Dr.KHU : 의료 상담 챗봇 🤖
+**📌 이 프로젝트는 [Advanced Dr.KHU using LlamaIndex 🦙](https://github.com/whybe-choi/advanced-rag-project)에 개선하여 새롭게 구성되었습니다!**
+
 ## 💻 Introduction
 증상을 입력하면 텍스트를 분석하여 복용할만한 약을 알려주거나, 진료 받으러 가야 할 과를 알려주는 등 의료 상담을 해주는 챗봇 제작 프로젝트 <br/>
 > 💊 **증상 평가 및 처방 안내** : 간단한 증상이나 질병에 대한 기본적인 정보를 제공함으로써 사용자가 자가 진단을 할 수 있습니다. <br/>
